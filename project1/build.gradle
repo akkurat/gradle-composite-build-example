@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'distribution'
+    id 'maven-publish'
+}
+
+wrapper {
+    gradleVersion = '5.6.2'
+    distributionType = Wrapper.DistributionType.ALL
+}
+
+project.group = 'com.example'
+project.version ='1.0.0'
+
+jar {
+    archiveBaseName = 'project-1'
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    archiveClassifier = 'sources'
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
+    archiveClassifier = 'javadoc'
+}
+
+publishing {
+    repositories {
+        maven {
+            url = "$buildDir/repo"
+        }
+    }
+
+    publications {
+        project1(MavenPublication) {
+            artifactId = 'project-1'
+
+            from components.java
+            artifact(project.distZip) {
+                classifier "resources"
+            }
+            artifact sourcesJar
+            artifact javadocJar
+        }
+    }
+}

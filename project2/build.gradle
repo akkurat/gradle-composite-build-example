@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+}
+
+wrapper {
+    gradleVersion = '5.6.2'
+    distributionType = Wrapper.DistributionType.ALL
+}
+
+project.group = 'com.example'
+project.version = '1.0.0'
+
+repositories {
+    maven {
+        url = "../project1/build/repo"
+    }
+}
+
+configurations {
+    additionalResources
+}
+
+dependencies {
+    implementation('com.example:project-1:1.0.0')
+
+    additionalResources(group: 'com.example', name: 'project-1', version: '1.0.0', classifier: 'resources', ext: 'zip')
+}
+
+task exampleTask {
+    inputs.files configurations.additionalResources.singleFile
+
+    doLast {
+
+        def tree = zipTree(configurations.additionalResources.singleFile)
+
+        def tempDir = "${buildDir}/temp/"
+
+        copy {
+            from tree
+            into tempDir
+        }
+    }
+}

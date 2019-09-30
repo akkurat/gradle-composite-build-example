@@ -1,0 +1,9 @@
+boolean substituteDependency = hasProperty('substituteDependency')
+
+includeBuild('../project1') {
+    if (substituteDependency) {
+        dependencySubstitution {
+            substitute module('com.example:project-1') with project(':')
+        }
+    }
+}
