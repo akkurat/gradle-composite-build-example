@@ -1,2 +1,2 @@
 # Gradle Composite Build Example
-Example gradle project for multi-project build and composite build.
+Example gradle project for an advanced composite build.
