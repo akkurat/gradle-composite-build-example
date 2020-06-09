@@ -23,7 +23,11 @@ configurations {
 dependencies {
     implementation('com.example:project-1:1.0.0')
 
-    additionalResources(group: 'com.example', name: 'project-1', version: '1.0.0', classifier: 'resources', ext: 'zip')
+    additionalResources(group: 'com.example', name: 'project-1', version: '1.0.0') {
+        capabilities {
+            requireCapability('com.example:project1-my-feature')
+        }
+    }
 }
 
 task exampleTask {

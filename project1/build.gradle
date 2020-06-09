@@ -12,6 +12,21 @@ wrapper {
 project.group = 'com.example'
 project.version ='1.0.0'
 
+java {
+    registerFeature('myFeature') {
+        usingSourceSet(sourceSets.main)
+    }
+}
+
+configurations.myFeatureApiElements.outgoing {
+    artifacts.clear()
+    artifact distZip
+}
+configurations.myFeatureRuntimeElements.outgoing {
+    artifacts.clear()
+    artifact distZip
+}
+
 jar {
     archiveBaseName = 'project-1'
 }
