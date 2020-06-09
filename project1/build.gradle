@@ -5,7 +5,7 @@ plugins {
 }
 
 wrapper {
-    gradleVersion = '5.6.2'
+    gradleVersion = '6.5'
     distributionType = Wrapper.DistributionType.ALL
 }
 
@@ -38,9 +38,6 @@ publishing {
             artifactId = 'project-1'
 
             from components.java
-            artifact(project.distZip) {
-                classifier "resources"
-            }
             artifact sourcesJar
             artifact javadocJar
         }
