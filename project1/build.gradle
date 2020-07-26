@@ -27,10 +27,6 @@ configurations.myFeatureRuntimeElements.outgoing {
     artifact distZip
 }
 
-jar {
-    archiveBaseName = 'project-1'
-}
-
 task sourcesJar(type: Jar) {
     from sourceSets.main.allJava
     archiveClassifier = 'sources'
@@ -50,8 +46,6 @@ publishing {
 
     publications {
         project1(MavenPublication) {
-            artifactId = 'project-1'
-
             from components.java
             artifact sourcesJar
             artifact javadocJar
