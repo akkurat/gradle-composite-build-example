@@ -5,7 +5,7 @@ plugins {
 }
 
 wrapper {
-    gradleVersion = '6.5'
+    gradleVersion = '7.3'
     distributionType = Wrapper.DistributionType.ALL
 }
 
@@ -37,6 +37,12 @@ task javadocJar(type: Jar) {
     archiveClassifier = 'javadoc'
 }
 
+
+// to test ant tasks in composites
+// ant.importBuild '../../torque/build-torque.xml'
+
+
+
 publishing {
     repositories {
         maven {
@@ -45,10 +51,18 @@ publishing {
     }
 
     publications {
-        project1(MavenPublication) {
+        Sub{{num}}(MavenPublication) {
             from components.java
             artifact sourcesJar
             artifact javadocJar
         }
     }
+}
+
+configurations {
+    additionalResources
+}
+
+dependencies {
+    {{deps}}
 }

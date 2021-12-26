@@ -3,7 +3,7 @@ plugins {
 }
 
 wrapper {
-    gradleVersion = '6.5'
+    gradleVersion = '7.3'
     distributionType = Wrapper.DistributionType.ALL
 }
 
@@ -20,22 +20,13 @@ configurations {
     additionalResources
 }
 
-dependencies {
-    implementation('com.example:project1:1.0.0')
-
-    additionalResources(group: 'com.example', name: 'project1', version: '1.0.0') {
-        capabilities {
-            requireCapability('com.example:project1-my-feature')
-        }
-    }
-}
-
+{{deps}}
 task exampleTask {
-    inputs.files configurations.additionalResources.singleFile
+    inputs.files configurations.additionalResources
 
     doLast {
 
-        def tree = zipTree(configurations.additionalResources.singleFile)
+        def tree = zipTree(configurations.additionalResources)
 
         def tempDir = "${buildDir}/temp/"
 
